@@ -576,59 +576,78 @@ justify-content:center;
 gap:15px;
 }
 
+/* NAVBAR (MUY IMPORTANTE) */
+.navbar{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* BOTÓN OCULTO EN ESCRITORIO */
+.menu-toggle{
+    display: none;
+}
+
+/* MÓVIL */
 @media (max-width: 768px){
-   /* Evita que las imágenes se salgan de la pantalla y rompan el diseño */
+
+    /* BOTÓN HAMBURGUESA (AHORA SÍ VISIBLE) */
+    .menu-toggle{
+        display: block;
+        font-size: 30px;
+        color: white;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        z-index: 9999; /* CLAVE: evita que quede oculto */
+        cursor: pointer;
+    }
+
+    /* CARRITO */
+    .btn-carrito{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 9999;
+    }
+
+    /* NOMBRE */
+    .nombre{
+        width: 100%;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    /* IMÁGENES RESPONSIVE */
     img {
         max-width: 100%;
         height: auto;
     }
 
-    /* Si usaste anchos fijos en tus contenedores (ej. 1000px), 
-       esto los obligará a ajustarse al ancho del celular */
+    /* CONTENEDORES */
     div, section, article, main, .contenedor { 
         width: 100% !important;
         max-width: 100% !important;
-        float: none !important; /* Por si usaste floats antiguos */
+        float: none !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
 
-    /* Ajusta el tamaño de letra si sientes que se ve muy grande en celular */
+    /* TEXTO */
     h1 { font-size: 1.8rem; }
     p { font-size: 1rem; }
-
-    .menu-toggle{
-        display: block;
-        font-size: 28px;
-        color: white;
-        position: absolute;
-        left: 10px;
-        top: 15px;
-        cursor: pointer;
-    }
-
-    .btn-carrito{
-        position: absolute;
-        right: 10px;
-        top: 15px;
-    }
-
-    .nombre{
-        width: 100%;
-        text-align: center;
-        margin-top: 40px;
-    }
 
     /* MENÚ OCULTO */
     .menu{
         display: none;
         flex-direction: column;
         width: 100%;
-        background-color: #3e2723; /* mismo café */
+        background-color: #3e2723;
         margin-top: 10px;
     }
 
-    /* MENÚ CUANDO SE ABRE */
+    /* MENÚ ACTIVO */
     .menu.active{
         display: flex;
     }
@@ -636,10 +655,6 @@ gap:15px;
     .menu li{
         text-align: center;
         padding: 10px 0;
-		
     }
 
-}
-.menu-toggle{
-    display: none;
 }
