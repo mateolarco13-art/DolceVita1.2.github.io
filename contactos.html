@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Contactos</title>
+<link rel="stylesheet" href="estilo.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="pagina-contactos">
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+
+<div class="logo">
+<img src="logoCafe.png" alt="Logo">
+</div>
+
+<div class="nombre">
+Caffe Dolce Vita
+</div>
+
+<ul class="menu">
+
+<li>
+<a href="CarroDeCompras.html" class="btn-carrito">
+<img src="carrito.png">
+<span id="contador-carrito">0</span>
+</a>
+</li>
+
+<li><a href="index.html">Inicio</a></li>
+<li><a href="nosotros.html">Nosotros</a></li>
+<li><a href="productos.html">Productos</a></li>
+<li><a href="contactos.html">Contactos</a></li>
+
+</ul>
+
+</nav>
+
+<!-- ===== CONTENIDO ===== -->
+<section class="contactos-contenido">
+
+<div class="formulario-container">
+
+<h1>Contactos</h1>
+<h2>Formulario de Env&iacute;o</h2>
+
+<p>Tu env&iacute;o ser&aacute; entregado de manera segura.</p>
+<p>Nuestro n&uacute;mero es:0958894591</p>
+<p>Nos ubicamos en: <strong>Pichincha, Machachi, Aloas&iacute;</strong></p>
+
+<form id="form-envio">
+
+<label>Nombre:</label>
+<input type="text" id="nombre" required>
+
+<label>Ubicación:</label>
+<input type="text" id="ubicacion" required>
+
+<label>Correo:</label>
+<input type="email" id="correo" required>
+
+<label>Número:</label>
+<input type="tel" id="numero" required>
+
+<!-- ===== RESUMEN DEL CARRITO ===== -->
+
+<h3>Resumen de tu pedido</h3>
+
+<div id="resumen-carrito"></div>
+
+<h3 id="total"></h3>
+
+<button type="button" onClick="cancelarPedido()" class="btn-cancelar">
+Cancelar pedido
+</button>
+
+<button type="submit" class="btn-enviar">
+Enviar
+</button>
+
+</form>
+
+<div id="mensaje"></div>
+
+</div>
+
+</section>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+let contenedor = document.getElementById("resumen-carrito");
+let totalTexto = document.getElementById("total");
+
+/* MOSTRAR PEDIDO */
+
+function mostrarResumen(){
+
+contenedor.innerHTML = "";
+
+let total = 0;
+
+if(carrito.length === 0){
+    contenedor.innerHTML = "<p>No hay productos en el carrito</p>";
+    totalTexto.textContent = "";
+    return;
+}
+
+carrito.forEach(producto => {
+
+let subtotal = producto.precio * producto.cantidad;
+total += subtotal;
+
+let div = document.createElement("div");
+
+div.innerHTML = `
+<p><strong>${producto.nombre}</strong></p>
+<p>Cantidad: ${producto.cantidad}</p>
+<p>Precio: $${producto.precio}</p>
+<p>Subtotal: $${subtotal}</p>
+<hr>
+`;
+
+contenedor.appendChild(div);
+
+});
+
+totalTexto.textContent = "Total a pagar: $" + total;
+
+}
+
+/* CANCELAR PEDIDO */
+
+function cancelarPedido(){
+
+localStorage.removeItem("carrito");
+carrito = [];
+
+mostrarResumen();
+actualizarContador();
+
+}
+
+/* ENVÍO (WHATSAPP) */
+
+document.getElementById("form-envio").addEventListener("submit", function(e){
+e.preventDefault();
+
+let nombre = document.getElementById("nombre").value;
+let ubicacion = document.getElementById("ubicacion").value;
+let correo = document.getElementById("correo").value;
+let numero = document.getElementById("numero").value;
+
+let mensaje = `Hola, quiero hacer un pedido:
+
+Nombre: ${nombre}
+Ubicación: ${ubicacion}
+Correo: ${correo}
+Número: ${numero}
+
+PEDIDO:
+`;
+
+let total = 0;
+
+carrito.forEach(p => {
+let subtotal = p.precio * p.cantidad;
+total += subtotal;
+
+mensaje += `- ${p.nombre} x${p.cantidad} = $${subtotal}\n`;
+});
+
+mensaje += `\nTotal: $${total}`;
+
+let telefono = "593958894591";
+
+let url = "https://wa.me/" + telefono + "?text=" + encodeURIComponent(mensaje);
+
+window.open(url, "_blank");
+
+});
+
+/* CONTADOR NAV */
+
+function actualizarContador(){
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+let total = 0;
+
+carrito.forEach(p => {
+    total += p.cantidad;
+});
+
+let contador = document.getElementById("contador-carrito");
+
+if(contador){
+    contador.textContent = total;
+}
+
+}
+
+/* INICIAR */
+
+mostrarResumen();
+actualizarContador();
+
+</script>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer-contacto">
+
+<div class="footer-contenido">
+
+<div class="contacto-item">
+<strong>N&uacute;mero:</strong>
+<p>0958894591</p>
+</div>
+
+<div class="contacto-item">
+<strong>Facebook:</strong>
+<p>CaffeDolceVita</p>
+</div>
+
+<div class="contacto-item">
+<strong>Instagram:</strong>
+<p>CaffeDolce_Vita</p>
+</div>
+
+<div class="contacto-item">
+<strong>Direcci&oacute;n:</strong>
+<p>Pichincha, Machachi, Aloas&iacute;</p>
+</div>
+
+</div>
+
+</footer>
+
+</body>
+</html>

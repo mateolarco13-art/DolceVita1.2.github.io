@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nosotros</title>
+    <link rel="stylesheet" href="estilo.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="logoCafe.png" alt="logoCafe">
+        </div>
+
+        <!-- Nombre del negocio -->
+        <div class="nombre">
+            Caffe Dolce Vita
+        </div>
+
+        <!-- Men� -->
+        <ul class="menu">
+
+<li>
+<a href="CarroDeCompras.html" class="btn-carrito">
+
+<img src="carrito.png" alt="carrito">
+
+<span id="contador-carrito">0</span>
+
+</a>
+</li>
+
+<li><a href="index.html">Inicio</a></li>
+<li><a href="nosotros.html">Nosotros</a></li>
+<li><a href="productos.html">Productos</a></li>
+<li><a href="contactos.html">Contactos</a></li>
+
+</ul>
+    </nav>
+</header>
+
+<section class="pagina-nosotros">
+
+    <!-- QUIENES SOMOS -->
+    <div class="seccion">
+        <div class="texto">
+            <h2>&iquest;Qui&eacute;nes Somos?</h2>
+            <p><h3>Somos una empresa dedicada a la exportaci&oacute;n de cacao y granos de caf&eacute; de Ecuador, manejados por personal calificado, con amplio conocimiento y experiencia en el proceso y la selecci&oacute;n de nuestros productos.</h3></p>
+            <p><strong><h3>Objetivo 1:</strong> Garantizar el procesamiento y comercializaci&oacute;n de caf&eacute; y cacao de acuerdo al Plan de Negocios presentado para cada cliente, concentr&aacute;ndonos en el segmento de exportaci&oacute;n.</h3></p>
+            <p><strong><h3>Objetivo 2:</strong> Mejorar la producci&oacute;n del caf&eacute; y cacao, orientando recursos a la post-cosecha y asegurando el prestigio de nuestros productos para mantener la fidelidad de los clientes.</h3></p>
+        </div>
+        <div class="imagen">
+            <img src="imagen1.jpg" alt="imagen">
+        </div>
+    </div>
+
+    <!-- MISION -->
+    <div class="seccion derecha">
+        <div class="texto">
+            <h2>Nuestra Misi&oacute;n</h2>
+            <p><h3>Comprometernos a proporcionar a nuestros clientes la m&aacute;s alta calidad de caf&eacute;, cultivado y procesado con pasi&oacute;n y dedicaci&oacute;n. Ser el proveedor l&iacute;der en la regi&oacute;n, ofreciendo una experiencia &uacute;nica y aut&eacute;ntica.</h3></p>
+        </div>
+        <div class="imagen">
+           <img src="imagen2.jpg" alt="imagen">
+        </div>
+    </div>
+
+    <!-- VISION -->
+    <div class="seccion">
+        <div class="texto">
+            <h2>Nuestra Visi&oacute;n</h2>
+            <p><h3>Ser la distribuidora de caf&eacute; m&aacute;s reconocida y respetada en la regi&oacute;n, destac&aacute;ndonos por nuestra calidad, innovaci&oacute;n y compromiso con la sostenibilidad y la comunidad.</h3></p>
+        </div>
+        <div class="imagen">
+            <img src="imagen3.jpg" alt="imagen">
+        </div>
+    </div>
+
+    <!-- OBJETIVOS -->
+    <div class="seccion derecha">
+        <div class="texto">
+            <h2>Nuestros Objetivos</h2>
+            <ul>
+                <li><h3>Ofrecer una variedad de productos de caf&eacute; de alta calidad.</h3></li>
+                <li><h3>Proporcionar un servicio al cliente excepcional y personalizado.</h3></li>
+                <li><h3>Establecer relaciones duraderas con proveedores y clientes.</h3></li>
+                <li><h3>Contribuir al desarrollo sostenible de la industria del caf&eacute;.</h3></li>
+            </ul>
+        </div>
+        <div class="imagen">
+            <img src="imagen4.jpg" alt="imagen">
+        </div>
+    </div>
+
+</section>
+<footer class="footer-contacto">
+
+    <div class="footer-contenido">
+        <div class="contacto-item">
+            <strong>N&uacutemero:</strong>
+            <p>0958894591</p>
+      </div>
+
+        <div class="contacto-item">
+            <strong>Facebook:</strong>
+            <p>CaffeDolceVita</p>
+        </div>
+
+        <div class="contacto-item">
+            <strong>Instagram:</strong>
+            <p>CaffeDolce_Vita</p>
+        </div>
+
+        <div class="contacto-item">
+            <strong>Direcci&oacuten:</strong>
+            <p>Pichincha, Machachi, Aloasi</p>
+        </div>
+    </div>
+
+</footer>
+<script>
+
+function actualizarContador(){
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+let total = 0;
+
+carrito.forEach(p => {
+    total += p.cantidad;
+});
+
+let contador = document.getElementById("contador-carrito");
+
+if(contador){
+    contador.textContent = total;
+}
+
+}
+
+actualizarContador();
+
+</script>
+</body>
+</html>

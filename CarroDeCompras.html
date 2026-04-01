@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Carrito</title>
+<link rel="stylesheet" href="estilo.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="pagina-productos">
+
+<header>
+<nav class="navbar">
+
+<div class="logo">
+<img src="logoCafe.png">
+</div>
+
+<div class="nombre">
+Caffe Dolce Vita
+</div>
+
+<ul class="menu">
+
+<li>
+<a href="CarroDeCompras.html" class="btn-carrito">
+<img src="carrito.png" alt="carrito">
+<span id="contador-carrito">0</span>
+</a>
+</li>
+
+<li><a href="index.html">Inicio</a></li>
+<li><a href="nosotros.html">Nosotros</a></li>
+<li><a href="productos.html">Productos</a></li>
+<li><a href="contactos.html">Contactos</a></li>
+
+</ul>
+
+</nav>
+</header>
+
+<section class="contenedor-carrito">
+
+<h1>Carrito de Compras</h1>
+
+<div id="lista-carrito"></div>
+
+<h2 id="total"></h2>
+
+<div class="acciones-carrito">
+
+<button onClick="vaciarCarrito()" class="btn-comprar">
+Vaciar carrito
+</button>
+
+<a href="contactos.html" class="btn-comprar">
+Comprar ahora
+</a>
+
+</div>
+
+</section>
+
+<footer class="footer-contacto">
+<div class="footer-contenido">
+
+<p>Tel&eacute;fono: 0958894591</p>
+<p>Facebook: CaffeDolceVita</p>
+<p>Instagram: CaffeDolce_Vita</p>
+<p>Direcci&oacute;n: Pichincha, Machachi, Aloas&iacute;</p>
+
+</div>
+</footer>
+
+<script>
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+let contenedor = document.getElementById("lista-carrito");
+let totalTexto = document.getElementById("total");
+
+/* MAPA DE IM�GENES */
+const imagenes = {
+"Caf� Premium de altura": "producto1.jpg",
+"Caf� tostado artesanal": "producto2.jpg",
+"Caf� org�nico seleccionado": "producto3.jpg",
+"Granos de caf� de exportaci�n": "producto4.png",
+"Cacao fino ecuatoriano": "producto5.png",
+"Caf� molido tradicional": "producto6.png",
+"Caf� gourmet": "producto7.jpg",
+"Selecci�n especial de caf�": "producto8.png",
+"Cacao de alta calidad": "producto9.jpg"
+};
+
+function mostrarCarrito(){
+
+contenedor.innerHTML = "";
+
+let total = 0;
+
+if(carrito.length === 0){
+    contenedor.innerHTML = "<p>Tu carrito est&aacute; vac&iacuteo</p>";
+    totalTexto.textContent = "";
+    return;
+}
+
+carrito.forEach((producto, index) => {
+
+let subtotal = producto.precio * producto.cantidad;
+total += subtotal;
+
+let imagen = producto.imagen;
+
+let div = document.createElement("div");
+div.classList.add("item-carrito");
+
+div.innerHTML = `
+<div style="display:flex; align-items:center; gap:15px;">
+
+<div class="img-producto">
+<img src="${imagen}">
+</div>
+
+<div>
+<p><strong>${producto.nombre}</strong></p>
+<p>Cantidad: ${producto.cantidad}</p>
+<p>Precio: $${producto.precio}</p>
+<p>Subtotal: $${subtotal}</p>
+
+<button onclick="eliminar(${index})">Eliminar</button>
+</div>
+
+</div>
+`;
+
+contenedor.appendChild(div);
+
+});
+
+totalTexto.textContent = "Total: $" + total;
+
+}
+
+/* ELIMINAR */
+
+function eliminar(index){
+
+carrito.splice(index,1);
+localStorage.setItem("carrito", JSON.stringify(carrito));
+
+mostrarCarrito();
+actualizarContador();
+
+}
+
+/* VACIAR */
+
+function vaciarCarrito(){
+
+localStorage.removeItem("carrito");
+carrito = [];
+
+mostrarCarrito();
+actualizarContador();
+
+}
+
+/* CONTADOR */
+
+function actualizarContador(){
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+let total = 0;
+
+carrito.forEach(p => {
+    total += p.cantidad;
+});
+
+let contador = document.getElementById("contador-carrito");
+
+if(contador){
+    contador.textContent = total;
+}
+
+}
+
+/* INICIAR */
+
+mostrarCarrito();
+actualizarContador();
+
+</script>
+
+</body>
+</html>

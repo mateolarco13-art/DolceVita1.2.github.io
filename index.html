@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="estilo.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="slider-fondo">
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+</div>
+
+    <header>
+	<section class="hero-central">
+
+    <h1 class="titulo-principal">
+        Caffe Dolce Vita
+    </h1>
+
+    <h2 class="slogan-central">
+        Pasión por el grano, amor por la Dolce Vita
+    </h2>
+
+    <a href="productos.html" class="btn-ver">Ver Productos</a>
+
+</section>
+        <nav class="navbar">
+		<div class="menu-toggle" onclick="toggleMenu()">
+☰
+</div>
+            <div class="logo">
+                <!-- Espacio para logo -->
+                <img src="logoCafe.png" alt="Logo">
+            </div>
+   <div class="nombre">
+            Caffe Dolce Vita
+        </div>
+            <ul class="menu">
+
+<li>
+<a href="CarroDeCompras.html" class="btn-carrito">
+
+<img src="carrito.png" alt="carrito">
+
+<span id="contador-carrito">0</span>
+
+</a>
+</li>
+
+<li><a href="index.html">Inicio</a></li>
+<li><a href="nosotros.html">Nosotros</a></li>
+<li><a href="productos.html">Productos</a></li>
+<li><a href="contactos.html">Contactos</a></li>
+
+</ul>
+        </nav>
+    </header>
+<footer class="footer-contacto">
+
+    <div class="footer-contenido">
+        <div class="contacto-item">
+            <strong>N&uacutemero:</strong>
+            <p>0958894591</p>
+      </div>
+
+        <div class="contacto-item">
+            <strong>Facebook:</strong>
+            <p>CaffeDolceVita</p>
+        </div>
+
+        <div class="contacto-item">
+            <strong>Instagram:</strong>
+            <p>CaffeDolce_Vita</p>
+        </div>
+
+        <div class="contacto-item">
+            <strong>Direcci&oacuten:</strong>
+            <p>Pichincha, Machachi, Aloasi</p>
+        </div>
+    </div>
+
+</footer>
+<script>
+
+function actualizarContador(){
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+let total = 0;
+
+carrito.forEach(p => {
+    total += p.cantidad;
+});
+
+let contador = document.getElementById("contador-carrito");
+
+if(contador){
+    contador.textContent = total;
+}
+
+}
+
+actualizarContador();
+
+</script>
+<script>
+function toggleMenu(){
+    document.querySelector(".menu").classList.toggle("active");
+}
+</script>
+</body>
+</html>
